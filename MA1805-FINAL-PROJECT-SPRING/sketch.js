@@ -1,86 +1,103 @@
 
+
 // GLOBAL VARIABLES
 
+
+// arrays to store particles and messages
 let particles = [];
 let dataWords = [];
 let messages = [];
 
+// current mode of the program
 let mode = "shadow";
 
+// tracking user activity
 let activityScore = 0;
 let keyCount = 0;
 let clickCount = 0;
 
+// start time for progression system
 let startTime;
 
+// not used yet but could show profile
 let showProfile = false;
 
-// UI buttons
+// store UI buttons
 let buttons = [];
 
-
+// sound variables (not used yet)
 let typingSound;
 let ambientSound;
 
-// Images
+// image variable (not used yet)
 let eyeImg;
 
+
+
+// LOAD FILES
 
 function preload() {
   
 }
 
 
+
+// SETUP 
+
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  startTime = millis();
+  createCanvas(windowWidth, windowHeight); // full screen canvas
+  startTime = millis(); // save start time
 
-  createButtons();
+  createButtons(); // create UI buttons
 }
 
 
-// MAIN DRAW LOOP
- 
+
+// MAIN DRAW LOOP 
+
 function draw() {
-  backgroundByMode();
+  backgroundByMode(); // change background based on mode
 
-  runMode();
+  runMode(); // run special mode effects
 
-  updateParticles();
-  updateWords();
-  updateMessages();
+  updateParticles(); // update particle system
+  updateWords(); // update text system
+  updateMessages(); // update random messages
 
-  drawUI();
-  drawStats();
+  drawUI(); // draw buttons
+  drawStats(); // show stats
 
-  checkProgression();
+  checkProgression(); // change modes over time
 }
+
 
 
 // MODES SYSTEM
 
 function runMode() {
   if (mode === "shadow") {
-    // normal
+    // normal mode (no extra effects)
   }
 
   if (mode === "surveillance") {
-    drawSurveillance();
+    drawSurveillance(); // red tracking effect
   }
 
   if (mode === "glitch") {
-    drawGlitch();
+    drawGlitch(); // random glitch visuals
   }
 
   if (mode === "profile") {
-    drawProfile();
+    drawProfile(); // show user profile
   }
 }
+
 
 
 // BACKGROUND EFFECTS
 
 function backgroundByMode() {
+  // different colours for each mode
   if (mode === "shadow") background(10, 10, 10, 25);
   if (mode === "surveillance") background(30, 0, 0, 40);
   if (mode === "glitch") background(0, 0, 0, 80);
@@ -88,36 +105,43 @@ function backgroundByMode() {
 }
 
 
-// PARTICLES SYSTEM
+
+// PARTICLES SYSTEM (MOUSE TRAILS)
 
 class Particle {
   constructor(x, y) {
+    // start near mouse position
     this.x = x + random(-5, 5);
     this.y = y + random(-5, 5);
-    this.size = random(5, 20);
-    this.alpha = 255;
+
+    this.size = random(5, 20); // random size
+    this.alpha = 255; // fully visible
+
+    // random movement
     this.xSpeed = random(-1, 1);
     this.ySpeed = random(-1, 1);
   }
 
   update() {
-    this.x += this.xSpeed;
+    this.x += this.xSpeed; // move
     this.y += this.ySpeed;
-    this.alpha -= 3;
+    this.alpha -= 3; // fade out
   }
 
   show() {
     noStroke();
-    fill(100, 200, 255, this.alpha);
+    fill(100, 200, 255, this.alpha); // blue glow
     ellipse(this.x, this.y, this.size);
   }
 }
 
 function updateParticles() {
+  // loop backwards so we can remove items safely
   for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update();
     particles[i].show();
 
+    // remove when invisible
     if (particles[i].alpha <= 0) {
       particles.splice(i, 1);
     }
@@ -125,20 +149,22 @@ function updateParticles() {
 }
 
 
-// TEXT SYSTEM
+
+// TEXT SYSTEM (KEYBOARD INPUT)
 
 class DataWord {
   constructor(letter, x, y) {
-    this.letter = letter;
+    this.letter = letter; // typed key
     this.x = x;
     this.y = y;
     this.alpha = 255;
-    this.ySpeed = random(-0.5, -2);
+
+    this.ySpeed = random(-0.5, -2); // float upward
   }
 
   update() {
     this.y += this.ySpeed;
-    this.alpha -= 2;
+    this.alpha -= 2; // fade
   }
 
   show() {
@@ -153,6 +179,7 @@ function updateWords() {
     dataWords[i].update();
     dataWords[i].show();
 
+    // remove when invisible
     if (dataWords[i].alpha <= 0) {
       dataWords.splice(i, 1);
     }
@@ -160,10 +187,12 @@ function updateWords() {
 }
 
 
+
 // RANDOM TRACKING MESSAGES
 
 class Message {
   constructor() {
+    // random message text
     this.text = random([
       "Tracking Enabled",
       "We See You",
@@ -171,22 +200,24 @@ class Message {
       "Profile Updating",
       "Behaviour Logged"
     ]);
+
     this.x = random(width);
     this.y = random(height);
     this.alpha = 255;
   }
 
   update() {
-    this.alpha -= 2;
+    this.alpha -= 2; // fade
   }
 
   show() {
-    fill(255, 0, 0, this.alpha);
+    fill(255, 0, 0, this.alpha); // red text
     text(this.text, this.x, this.y);
   }
 }
 
 function updateMessages() {
+  // randomly create messages
   if (random() < 0.01) {
     messages.push(new Message());
   }
@@ -195,6 +226,7 @@ function updateMessages() {
     messages[i].update();
     messages[i].show();
 
+    // remove when invisible
     if (messages[i].alpha <= 0) {
       messages.splice(i, 1);
     }
@@ -202,35 +234,37 @@ function updateMessages() {
 }
 
 
+
 // INTERACTION EVENTS
 
 function mouseMoved() {
-  activityScore++;
+  activityScore++; // track movement
 
+  // create particles at mouse
   for (let i = 0; i < 5; i++) {
     particles.push(new Particle(mouseX, mouseY));
   }
 }
 
 function mousePressed() {
-  clickCount++;
+  clickCount++; // count clicks
 
-  // Button clicks
+  // check if any button is clicked
   for (let b of buttons) {
     b.checkClick(mouseX, mouseY);
   }
 }
 
 function keyTyped() {
-  keyCount++;
+  keyCount++; // count keys
 
+  // create floating letter
   dataWords.push(new DataWord(key, mouseX, mouseY));
-
-  
 }
 
 
-// UI SYSTEM
+
+// UI SYSTEM (BUTTONS)
 
 class Button {
   constructor(x, y, w, h, label, action) {
@@ -239,7 +273,7 @@ class Button {
     this.w = w;
     this.h = h;
     this.label = label;
-    this.action = action;
+    this.action = action; // what would happen when clicked
   }
 
   show() {
@@ -252,18 +286,20 @@ class Button {
   }
 
   checkClick(mx, my) {
+    // check if mouse is inside button
     if (
       mx > this.x &&
       mx < this.x + this.w &&
       my > this.y &&
       my < this.y + this.h
     ) {
-      this.action();
+      this.action(); // run button action
     }
   }
 }
 
 function createButtons() {
+  // create buttons for each mode
   buttons.push(new Button(20, 20, 120, 30, "Shadow", () => mode = "shadow"));
   buttons.push(new Button(20, 60, 120, 30, "Surveillance", () => mode = "surveillance"));
   buttons.push(new Button(20, 100, 120, 30, "Glitch", () => mode = "glitch"));
@@ -277,12 +313,14 @@ function drawUI() {
 }
 
 
+
 // STATS DISPLAY
 
 function drawStats() {
   fill(255);
   textSize(14);
 
+  // show live data tracking
   text("Activity: " + activityScore, width - 150, 20);
   text("Keys: " + keyCount, width - 150, 40);
   text("Clicks: " + clickCount, width - 150, 60);
@@ -293,14 +331,16 @@ function drawStats() {
 
 function drawSurveillance() {
   fill(255, 0, 0);
-  ellipse(mouseX, mouseY, 10);
+  ellipse(mouseX, mouseY, 10); // tracking dot
 
+  // random lines pointing to user
   if (random() < 0.05) {
     line(random(width), 0, mouseX, mouseY);
   }
 }
 
 function drawGlitch() {
+  // random glitch rectangles
   for (let i = 0; i < 10; i++) {
     fill(random(255), random(255), random(255));
     rect(random(width), random(height), random(50), random(10));
@@ -320,6 +360,7 @@ function drawProfile() {
 }
 
 
+
 // PROFILE LOGIC
 
 function getActivityLevel() {
@@ -335,18 +376,21 @@ function getTypingSpeed() {
 }
 
 
+
 // PROGRESSION SYSTEM
 
 function checkProgression() {
   let elapsed = (millis() - startTime) / 1000;
 
+  // change modes over time
   if (elapsed > 20) mode = "surveillance";
   if (elapsed > 40) mode = "glitch";
   if (elapsed > 60) mode = "profile";
 }
 
 
-// RESIZE
+
+// RESIZE CANVAS
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
