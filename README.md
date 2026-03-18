@@ -1,1 +1,3 @@
 # MA1805-FINAL-PROJECT-SPRING
+
+Linush Thevananth
