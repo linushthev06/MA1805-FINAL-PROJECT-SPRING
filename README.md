@@ -1,5 +1,7 @@
 # MA1805-FINAL-PROJECT-SPRING
 
+DIGITAL SURVEILANCE VISUALISER
+
 https://linushthev06.github.io/MA1805-FINAL-PROJECT-SPRING/
 
 
@@ -7,15 +9,64 @@ https://linushthev06.github.io/MA1805-FINAL-PROJECT-SPRING/
 
 Linush Thevananth
 
+Project Description
 
-Data Shadows 2.0 is an interactive digital art piece created with p5.js. It is about digital identity, surveillance, and data tracking. It demonstrates how we constantly generate data through simple actions such as mouse movement, typing, and clicking. It reveals the hidden processes by creating a visual experience where one can generate their own ‘data shadow’.
+My interactive p5.js visualisation explores themes around digital surveillance, data tracking and what people do online. My piece reacts to users' actions like mouse movements, clicks and keyboard inputs to show that people online are always monitored.
 
-It reacts to the user’s actions in real-time. Moving the mouse generates glowing trails of particles, and typing generates floating texts that disappear over time. It also includes different modes like the shadow mode, which is calming; the surveillance mode with red-colored visuals; the glitch mode with crazy effects; and the profile mode, which generates a simple profile based on the user’s actions. It also records moving the mouse, typing, and clicking, which are displayed on the screen. Over time, the experience changes by itself, which gives the impression of immersion.
+As the user engages, it passes through different scenarios:
 
-It was inspired by concepts like online tracking and profiling, as well as interactive and generative art. The concept of the ‘digital shadow’ was also influenced by the study of how companies track and collect data from users.
+ Shadow Mode - quiet data collection with little visuals
 
-During the project, I encountered a few problems. The system was slow because it created too many particles at once. This was solved by letting them fade away after a certain period of time. Another issue was the program's visual cover, which was caused by too many displays. This was solved by adding moving and fading effects.
+ Surveillance Mode - obvious tracking 
 
-Working with different systems was another problem, but it was solved by breaking the code into sections.
+ Glitch Mode - chaos and a lack of control
 
-I learned both technical and creative skills in this project. In technical skills, I learned programming concepts such as classes, arrays, and real-time interaction. In creative skills, I learned how coding can be used to tell ideas and create good user experiences. In general, this project demonstrates the visual representation of digital behaviour and encourages people to be concerned with how their behaviour is tracked online all the time.
+ Profile Mode - concept of making a profile of a user
+
+Through this experience, the goal is to illustrate the fact that any actions made online are always tracked.
+
+ Technical Approach
+
+My interactive p5.js visualisation uses interactive systems as well as live data visualisation techniques.
+
+Features:
+
+Particle System – mouse movements to create particles that vanish over time symbolise the digital trail left by a user
+
+Text/Data Visualisation System – keyboard inputs produce random text blocks symbolising the data captured by the system
+
+ Message System – random tracking messages like "Tracking Enabled" to highlight the theme of surveillance
+
+ Modes – my application changes modes periodically, and each mode has different visuals and functionality
+
+ User Tracking Metrics - the application tracks the user's activity score, key presses and click count
+
+ User Interface Buttons – allows to change modes manually
+
+Sources of Inspiration
+
+- https://p5js.org/examples/
+
+- https://openprocessing.org/ 
+
+- Black Mirror series 
+
+The inspiration helped guide the look and feel of the project as well as the concept behind capturing users' data and actions in real time.
+
+ Author and Roles in Project
+
+This project was created by me.
+
+
+Roles:
+
+Programmer (programming the code and adding the functionality to it)
+
+Visual Designer (designing the overall experience)
+
+Researcher (exploring different concepts and themes)
+
+Tester (testing and troubleshooting the project)
+
+
+
