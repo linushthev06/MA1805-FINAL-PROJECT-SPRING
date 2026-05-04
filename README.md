@@ -69,4 +69,17 @@ Researcher (exploring different concepts and themes)
 Tester (testing and troubleshooting the project)
 
 
+Reflection 
+
+The current project has been carried out solo however, multiple roles have been involved, as I've mentioned above.
+
+One of the biggest strengths of the project is the combination of the creative aspects within the development process. In particular, an interactive system with a reaction to user input has been developed and represents the concept of digital surveillance well.
+
+One of the weaknesses was the issue related to maintaining organisation while working on the program that had several elements, such as particles, text, and UI. In addition, some problems occurred because of the duplication and inconsistency between the different modes in the project.
+
+The above challenges were successfully overcome by revising the code and dividing it into classes, for instance, Particle and Message, and gradually testing each feature separately.
+
+Another weakness is the combination of creativity and the technical side because some creative aspects had to be modified for the program functionality.
+
+In summary, the project development has enhanced my skills in terms of working solo in different roles and developing an interactive project.
 
